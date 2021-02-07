@@ -1,0 +1,13 @@
+load(dblint);
+
+/* F(X, Y) := (mode_declare([X, Y], float), 1.0); */
+/* F(X, Y) := (mode_declare([X, Y], float), X*Y); */
+F(X, Y) := (mode_declare([X, Y], float), cos(100*sin(X))*cos(100*sin(Y)));
+/* F(X, Y) := (mode_declare([X, Y], float), (1+sin(2*%pi*X)*(1+sin(2*%pi*Y))));
+ * */
+R(X) := (mode_declare(X, float), 0.0);
+S(X) := (mode_declare(X, float), X);
+/* S(X) := (mode_declare(X, float), -X+1.0); */
+translate(F, R, S);
+
+dblint_ans : float(dblint('F, 'R, 'S, 0.0, 1.0));

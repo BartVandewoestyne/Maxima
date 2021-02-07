@@ -1,0 +1,25 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 0.8.5 ] */
+
+/* [wxMaxima: input   start ] */
+eq1: %lambda[1]+%lambda[2]+%lambda[3]+%lambda[4]=1;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq2: r = -%lambda[3] + %lambda[4] -%lambda[2] - %lambda[1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq3: s = -%lambda[3] - %lambda[4] + %lambda[2] - %lambda[1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+eq4: t = -%lambda[3] - %lambda[4] - %lambda[2] + %lambda[1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve([eq1, eq2, eq3, eq4], [%lambda[1], %lambda[2], %lambda[3], %lambda[4]]);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

@@ -1,0 +1,3 @@
+load(vect);
+evalV(v):=ev(express(v),nouns);
+evalV(grad((1-x)^2+100*(y-x^2)^2));

@@ -1,0 +1,6 @@
+/* Obtain solutions (2.473) from Jeannick's PhD thesis on page 92. */
+
+eq1: A1 + B1 = 0;
+eq2: A2*exp(-%i*k2*h) = A1*( exp(-%i*k1*h) - exp(%i*k1*h) );
+eq3: A2*exp(-%i*k2*h)/Z2 - A1*( exp(-%i*k1*h + exp(%i*k1*h) ))/Z1 = I;
+soln: solve([eq1, eq2, eq3], [A1, B1, A2]);

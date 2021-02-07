@@ -1,0 +1,49 @@
+/*
+ * Maxima version: 5.20.1 using Lisp SBCL 1.0.38-2.el5.
+ *
+ * Problem: what is the value of
+ *
+ *    lim_{s->0} Ge(s)
+ *
+ * Is Ge(s) singular in 0 and is this limit +infinity, or isn't Ge(s)
+ * singular in 0 and does it approach a constant (possibly complex) value?
+ */
+   
+/*
+assume(omega>0)$
+assume(mu0>0)$
+assume(k0>0)$
+assume(esub>0)$
+assume(e0>0)$
+assum(d>0)$
+*/
+
+d: 1e-3$
+f: 10e9$
+omega: 2*%pi*f$
+e0: 8.8541878176e-12$
+mu0: 4e-7*%pi$
+v0: 1/sqrt(e0*mu0)$
+k0: 2*%pi*f/v0$
+esub: 12.9*e0$
+
+Z_TE_sub(s) := %i*omega*mu0/(k0*sqrt(s^2-esub/e0))$
+Z_TE_0(s)   := %i*omega*mu0/(k0*sqrt(s^2-1))$
+Z_TM_sub(s) := (k0*sqrt(s^2-esub/e0))/(%i*omega*esub)$
+Z_TM_0(s)   := (k0*sqrt(s^2-1))/(%i*omega*e0)$
+vTE(s)      := (Z_TE_sub(s)*Z_TE_0(s))/(Z_TE_sub(s) + Z_TE_0(s)*coth(d*k0*sqrt(s^2-esub/e0)))$
+vTM(s)      := (Z_TM_sub(s)*Z_TM_0(s))/(Z_TM_sub(s) + Z_TM_0(s)*coth(d*k0*sqrt(s^2-esub/e0)))$
+Gm(s)       := -vTE(s)/(2*%pi)$
+Ge(s)       := (vTE(s)-vTM(s))/(2*%pi*(s*k0)^2)$
+
+/* Notice the behavior in the interval [1e-8:1e-7].  I am wondering if this is
+   just a numerical issue due to rounding error, or whether Ge(s) is really
+   singular in 0... */
+plot2d(abs(Ge(s)), [s, 1e-8, 1e1], [logx],[logy]);
+
+/* Calculate the limits of Gm and Ge for s going to zero.  Preferably in a
+   parametric form, but if that is not possible, a numerical value could also
+   be ok... */
+/* PROBLEM: Unfortunately, the limit for Ge(s) fails :-( */
+lim_Gm:       limit(Gm(s), s, 0); /* This one works. */
+lim_Ge:       limit(Ge(s), s, 0); /* This one fails... why??? */

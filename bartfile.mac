@@ -1,0 +1,20 @@
+d: 1e-3$
+f: 10^6$
+omega: 2*%pi*f$
+epsilon[0]: 8.8541878176e-2$
+mu[0]: 4*%pi*10^(-7)$
+v[0]: 1/sqrt(epsilon[0]*mu[0])$
+k[0]: 2*%pi*f/v[0]$
+epsilon[sub]: 12.9*epsilon[0]$
+
+Z_TE_sub(s) := %i*omega*mu[0]/(k[0]*sqrt(s^2-epsilon[sub]/epsilon[0]))$
+Z_TE_0(s)   := %i*omega*mu[0]/(k[0]*sqrt(s^2-1))$
+Z_TM_sub(s) := (k[0]*sqrt(s^2-epsilon[sub]/epsilon[0]))/(%i*omega*epsilon[sub])$
+Z_TM_0(s)   := (k[0]*sqrt(s^2-1))/(%i*omega*epsilon[0])$
+vTE(s)      := (Z_TE_sub(s)*Z_TE_0(s))/(Z_TE_sub(s) + Z_TE_0(s)*coth(d*k[0]*sqrt(s^2-epsilon[sub]/epsilon[0])))$
+vTM(s)      := (Z_TM_sub(s)*Z_TM_0(s))/(Z_TM_sub(s) + Z_TM_0(s)*coth(d*k[0]*sqrt(s^2-epsilon[sub]/epsilon[0])))$
+Gm(s)       := -vTE(s)/(2*%pi)$
+Ge(s)       := (vTE(s)-vTM(s))/(2*%pi*s*k[0])$
+
+plot2d(float(abs(Gm(s))), [s, 1e-1, 1e3]);
+plot2d(float(abs(Ge(s))), [s, 1e-1, 1e3]);

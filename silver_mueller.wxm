@@ -1,0 +1,68 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 0.8.5 ] */
+
+/* [wxMaxima: input   start ] */
+restart; load(vect); load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+mymax: 8;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+n: [0, 0, 1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+E: [1, 2, -2]; H: [2, 1, 2];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+nxE: express(n~E);  Exn: express(E~n);  Exnxn: express((E~n)~n);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+nxH: express(n~H);  Hxn: express(H~n); nxnxH: express(n~(n~H));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+sum1: Exnxn+Hxn;  sum2: nxE+nxnxH;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+draw3d(proportional_axes=xyz,
+       axis_3d=true,
+       xtics = 1, ytics = 1, ztics = 1,
+       /* xrange=[-mymax, mymax],
+       yrange=[-mymax, mymax],
+       zrange=[-mymax, mymax], */
+       color=black,
+       vector([0,0,0], n),
+       label(["n", n[1], n[2], n[3]]),
+       color=blue,
+       vector([0,0,0], E),
+       label(["E", E[1], E[2], E[3]]),
+       vector([0,0,0], H),
+       label(["H", H[1], H[2], H[3]]),
+       color=red,
+       vector([0, 0, 0], nxE),
+       label(["nxE", nxE[1], nxE[2], nxE[3]]),
+       vector([0, 0, 0], Exn),
+       label(["Exn", Exn[1], Exn[2], Exn[3]]),
+       vector([0, 0, 0], Exnxn),
+       label(["Exnxn", Exnxn[1], Exnxn[2], Exnxn[3]]),
+       vector([0, 0, 0], nxH),
+       label(["nxH", nxH[1], nxH[2], nxH[3]]),
+       vector([0, 0, 0], nxnxH),
+       label(["nxnxH", nxnxH[1], nxnxH[2], nxnxH[3]]),
+       vector([0, 0, 0], Hxn),
+       label(["Hxn", Hxn[1], Hxn[2], Hxn[3]]),
+       color=green,
+       vector([0,0,0], sum1),
+       label(["sum1", sum1[1], sum1[2], sum1[3]]),
+       vector([0,0,0], sum2),
+       label(["sum2", sum2[1], sum2[2], sum2[3]]));
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

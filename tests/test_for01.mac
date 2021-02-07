@@ -1,0 +1,8 @@
+s: 2$
+f(x) := x$
+
+phi[0](x) := f(x)$
+for j:1 thru s do
+  phi[j](x) := phi[j-1](x) + f(x)$
+
+dispfun(phi[s])$

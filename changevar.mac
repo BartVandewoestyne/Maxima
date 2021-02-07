@@ -1,0 +1,14 @@
+kill(all);
+
+/* A one-dimensional function */
+depends(f, x)$
+/* f(x) := x; */
+'integrate(f(x), x, 0, 2);
+changevar(%, y-x/2, y, x);
+
+/* An s-dimensional function */
+/* TODO: THIS IS NOT WORKING YET!!! */
+s: 3;
+f(x) := product(x[i], i, 1, s);
+f([5, 5, 5]);
+integrate(integrate(integrate(f(x), x[1], 0, 2), x[2], 0, 2), x[3], 0, 2);

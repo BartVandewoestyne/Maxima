@@ -1,0 +1,2 @@
+g(x) := x;
+integrate(g(x), x, 0, 2);

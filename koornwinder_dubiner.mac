@@ -1,0 +1,20 @@
+load(draw)$
+
+/* Choose a certain i and j. */
+i:1$
+j:2$
+
+/* Definition of the orthogonal polynomials. */
+a:2*(1+r)/(1-s)-1$
+b:s$
+/* Formula (6.6) from the book */
+psi1(r,s):=sqrt(2)*jacobi_p(i,0,0,a)*jacobi_p(j,2*i+1,0,b)*(1-b)^i;
+/* Koornwinder-Dubiner polynomials */
+psi2(r,s):=sqrt((2*i+1)*(i+j+1)/2)*jacobi_p(i,0,0,a)*((1-s)/2)^i*jacobi_p(j,2*i+1,0,b);
+
+/* Check the L2-norm of both forms */
+integrate(integrate((psi1(r,s))^2, r, -1, -s), s, -1, 1);
+integrate(integrate((psi2(r,s))^2, r, -1, -s), s, -1, 1);
+
+draw3d(enhanced3d=true, explicit(psi1(r,s), r, -1, 1, s, -1, 1));
+draw3d(enhanced3d=true, explicit(psi2(r,s), r, -1, 1, s, -1, 1));

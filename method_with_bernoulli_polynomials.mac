@@ -1,0 +1,51 @@
+/*
+ PURPOSE OF THIS SCRIPT:
+   Create a function f_periodized(x) out of f(x) in a certain way and
+   hopefully obtain a nice expression for f_periodized(x) that can easily
+   be implemented in Fortran 95.
+
+   If anybody can come up with another function f(x) that leads to a nice
+   expression for f_periodized(x), that would be welcome.
+*/
+
+/* Clear all variables and functions to prevent strange behavior. */
+kill(all)$
+
+/* Allow transformation of output to Fortran 90 syntax. */
+load("f90")$
+
+/* The dimension of the function.  I would like to be able to go up to 10
+   dimensions.  */
+s: 10$
+
+/* Smoothness parameter for the periodized function.  I would like to use
+   alpha=5. */
+alpha: 5$
+
+/* The original, nonperiodic function in s dimensions. */
+f(x) := (sum(sin(i*x[i]*%pi/4), i, 1, s))^6$
+
+/* A definition for convenience. */
+P(x, n) := bernpoly(x, n+1)/(n+1)!$
+
+/* The recurrence to setup the periodized function. */
+phi[0](x) := f(x)$
+for j:1 thru s do
+  phi[j](x) := phi[j-1](x)
+              + sum(
+                 sum(
+                   (-1)^nj*P(x[j], aj)*at(diff(phi[j-1](x), x[j], aj), x[j]=nj),
+                   nj, 0, 1),
+                 aj, 0, alpha-1)$
+
+/* The periodized function.
+   QUESTION:
+     It is important that I can easily implement f_periodized in Fortran 95,
+     hopefully for alpha=5 and up to 10 dimensions.
+     Therefore, i must either find ways to simplify the expression for
+     f_periodized(x) or find ways to discover structure in f_periodized(x).
+     What commands could be useful here?
+*/
+f_periodized(x) := phi[s](x)$
+expand(f_periodized(x));
+f90(f_periodized(x));

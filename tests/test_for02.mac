@@ -1,0 +1,10 @@
+s: 2$
+f(x) := product(x[i]^i, i, 1, s)$
+
+phi[0](x) := f(x)$
+for j:1 thru s do
+  phi[j](x) := phi[j-1](x) + f(x)$
+
+/* This does not work */
+f_periodized(x) := phi[s](x)$
+f_periodized(x);

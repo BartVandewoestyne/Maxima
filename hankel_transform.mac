@@ -1,0 +1,4 @@
+/* TODO: DIT WERKT NOG NIET */
+/* G(k_rho) := 1/((k_rho/k0)^2-p^2); */
+G(k_rho) := 1/k_rho;
+integrate(G(k_rho)*bessel_j(0,k_rho)*k_rho, k_rho, 0, inf);

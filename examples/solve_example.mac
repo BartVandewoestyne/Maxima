@@ -1,0 +1,4 @@
+eq1: x + y = 2;
+eq2: x - y = 4;
+soln: solve([eq1, eq2], [x, y]);
+x: soln[1][1];

@@ -1,0 +1,7 @@
+/* Draws the complex function z^3+1 */
+z3(x,y):= abs((x+y*%i)^3+1);
+draw3d(surface_hide =true,
+       color = green,
+       contour = both,
+       enhanced3d=true,
+       explicit(z3(x,y),x,-10,10,y,-10,10) );

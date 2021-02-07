@@ -1,0 +1,17 @@
+/* This script checks the series expansions at the bottom of page 98 from
+   Jeannick Sercu's PhD thesis. */
+
+/* Formula (2.495a) -> matches! */
+/* Consider it as a one-dimensional function in k[1]. */
+Gamma[1]: sqrt(k[rho]^2 - k[1]^2);
+taylor(Gamma[1], k[1], 0, 5);
+
+/* Formula (2.495c) -> matches! */
+/* Consider it as a one-dimensinal function in k[2]. */
+Gamma[2]: sqrt(k[rho]^2 - k[2]^2);
+taylor(exp(-Gamma[2]*(z-d)), k[2], 0, 4);
+factor(%);
+
+/* Formula (2.495d) -> matches! */
+taylor(1/(epsilon[2]*Gamma[1]+epsilon[1]*Gamma[2]), k[1], 0, 2, k[2], 0, 2);
+expandwrt(%, k[rho]);

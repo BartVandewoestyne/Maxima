@@ -1,0 +1,6 @@
+k: 4;
+
+if (k=2) then
+  display(x)
+else
+  display(y);
