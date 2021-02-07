@@ -1,0 +1,2 @@
+# Maxima
+Some Maxima experiments
